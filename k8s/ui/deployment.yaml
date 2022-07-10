@@ -1,0 +1,18 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ims-ui
+spec:
+  selector:
+    matchLabels:
+      app: ims-ui-app
+  template:
+    metadata:
+      labels:
+        app: ims-ui-app
+    spec:
+      containers:
+        - image: aaarti/ims-ui
+          name: ui
+          ports:
+            - containerPort: 3000

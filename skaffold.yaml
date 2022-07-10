@@ -1,0 +1,26 @@
+apiVersion: skaffold/v2beta28
+kind: Config
+metadata:
+  name: ims
+build:
+  tagPolicy:
+    gitCommit:
+      ignoreChanges: true
+  insecureRegistries:
+    - docker.io
+  local:
+    useBuildkit: true
+    concurrency: 0
+  artifacts:
+  - image: aaarti/ims-server
+    context: ./server
+  - image: aaarti/ims-ui
+    context: ./ui
+
+deploy:
+  kubectl:
+    manifests:
+      - k8s/server/deployment.yaml
+      - k8s/server/service.yaml
+      - k8s/ui/deployment.yaml
+      - k8s/ui/service.yaml
